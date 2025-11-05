@@ -1,0 +1,15 @@
+<div class="flex flex-col items-center gap-4 mt-8">
+  <h2 class="text-2xl font-semibold">Marcar Presença</h2>
+
+  <video id="video" width="300" height="300" *ngIf="scanning" class="rounded shadow-md"></video>
+
+  <button
+    class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+    (click)="marcarPresenca()"
+    [disabled]="scanning"
+  >
+    {{ scanning ? 'Lendo QR...' : 'Marcar Presença' }}
+  </button>
+
+  <p *ngIf="message" class="mt-4 text-center">{{ message }}</p>
+</div>

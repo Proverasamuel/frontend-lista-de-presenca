@@ -1,0 +1,119 @@
+<header class="bg-blue-700 text-white shadow-lg">
+  <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+    <div class="flex items-center space-x-2">
+      <h1 class="text-2xl font-bold tracking-tight">Sistema Delegado</h1>
+    </div>
+    <nav class="flex space-x-6">
+      <a 
+        routerLink="/dashboard" 
+        routerLinkActive="border-b-2 border-white font-semibold" 
+        class="py-2 px-1 transition-all duration-200 hover:text-blue-200"
+      >
+        Dashboard
+      </a>
+      <a 
+        routerLink="/aulas" 
+        routerLinkActive="border-b-2 border-white font-semibold" 
+        class="py-2 px-1 transition-all duration-200 hover:text-blue-200"
+      >
+        Gestão de Aulas
+      </a>
+    </nav>
+  </div>
+</header>
+
+<div class="max-w-md mx-auto mt-10 p-4 bg-white shadow rounded">
+    <h2 class="text-xl font-bold mb-4 text-center">Criar Aula</h2>
+
+    <form [formGroup]="form" (ngSubmit)="criarAula()" class="flex flex-col gap-3">
+        <select formControlName="disciplinaId" class="border p-2 rounded">
+            <option value="" disabled selected>Selecione a disciplina</option>
+            <option *ngFor="let d of disciplines" [value]="d.id">{{ d.nome }}</option>
+        </select>
+        <input type="text" formControlName="tema" class="border p-2 rounded" placeholder="Tema da Aula" />
+
+        <input type="datetime-local" formControlName="dataHora" class="border p-2 rounded" placeholder="Data e Hora" />
+        <input type="number" formControlName="duracao" class="border p-2 rounded" placeholder="Duração (minutos)" />
+        <input type="text" formControlName="localizacao" class="border p-2 rounded" placeholder="Localização" />
+
+        <button type="submit" class="bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+            [disabled]="form.invalid">
+            Criar Aula
+        </button>
+    </form>
+
+    <!-- Exibir QR Code após criar -->
+    <div *ngIf="qrCodeUrl" class="text-center mt-6">
+        <h3 class="text-lg font-semibold mb-2">QR Code da Aula</h3>
+        <img [src]="qrCodeUrl" alt="QR Code da Aula" class="mx-auto border rounded shadow" />
+        <p class="text-sm text-gray-600 mt-2">Compartilhe este QR com os alunos para marcar presença</p>
+    </div>
+    <hr class="my-4" />
+
+    <h2 class="text-xl font-bold mb-4 text-center">Consultar Presenças</h2>
+
+    <div class="flex flex-col gap-3">
+        <!-- Escolher disciplina -->
+        <select [(ngModel)]="filtroDisciplinaId" (change)="carregarAulas()" class="border p-2 rounded">
+            <option value="" disabled selected>Selecione a disciplina</option>
+            <option *ngFor="let d of disciplines" [value]="d.id">{{ d.nome }}</option>
+        </select>
+
+        <!-- Escolher aula -->
+        <select [(ngModel)]="filtroAulaId" class="border p-2 rounded" [disabled]="!aulas.length">
+            <option value="" disabled selected>Selecione a aula</option>
+            <option *ngFor="let a of aulas" [value]="a.id">
+                {{ a.tema }} — {{ a.dataHora?.seconds * 1000 | date: 'short' }}
+            </option>
+        </select>
+
+        <!-- Botão buscar -->
+        <button (click)="buscarPresencas()" class="bg-green-600 text-white py-2 rounded hover:bg-green-700 transition"
+            [disabled]="!filtroDisciplinaId || !filtroAulaId">
+            Ver Presenças
+        </button>
+    </div>
+
+    <!-- Tabela de presenças -->
+    <div class="mt-6">
+        <h3 class="text-lg font-semibold mb-2" *ngIf="presencas.length">Presenças encontradas</h3>
+        <table *ngIf="presencas.length" class="w-full border">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="py-2 px-4 text-left">Aluno</th>
+                    <th class="py-2 px-4 text-left">Email</th>
+                    <th class="py-2 px-4 text-left">Hora</th>
+                    <th class="py-2 px-4 text-left">Assiduidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of presencas" class="border-t">
+                    <td class="py-2 px-4">{{ p.aluno.nome || '—' }}</td>
+                    <td class="py-2 px-4">{{ p.aluno.email || '—' }}</td>
+                    <td class="py-2 px-4">{{ p.hora?._seconds * 1000 | date: 'short' }}</td>
+                    <td class="py-2 px-4">
+                        {{ p.presente ? 'Presente' : 'Ausente' }}
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+
+        <p *ngIf="!presencas.length && pesquisaFeita" class="text-gray-600 text-center mt-3">
+            Nenhuma presença encontrada para a aula selecionada.
+        </p>
+    </div>
+ </div>
+
+<footer class="bg-gray-800 text-white py-6 border-t border-gray-700">
+  <div class="container mx-auto px-4">
+    <div class="text-center">
+      <p class="text-gray-400">
+        &copy; {{ currentYear }} Atlas Digital. Todos os direitos reservados.
+      </p>
+      <p class="text-gray-500 text-sm mt-2">
+        Sistema de gestão acadêmica - Versão 1.0
+      </p>
+    </div>
+  </div>
+</footer>

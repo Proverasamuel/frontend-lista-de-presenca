@@ -1,0 +1,11 @@
+<div class="flex flex-col items-center justify-center min-h-screen">
+  <div class="bg-white shadow-lg rounded-2xl p-6 w-80">
+    <h2 class="text-2xl font-semibold mb-4 text-center">Login</h2>
+    <input [(ngModel)]="email" type="email" placeholder="Email" class="w-full mb-3 p-2 border rounded" />
+    <input [(ngModel)]="password" type="password" placeholder="Senha" class="w-full mb-3 p-2 border rounded" />
+    <button (click)="login()" class="bg-blue-600 text-white w-full py-2 rounded">Entrar</button>
+    <p *ngIf="error" class="text-red-500 mt-3 text-center">{{ error }}</p>
+  </div>
+</div>
+
+
