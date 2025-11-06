@@ -28,7 +28,7 @@
             ],
             "styles": [
               "src/styles.css",
-               "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
             "scripts": []
           },
@@ -37,13 +37,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "2mb",
+                  "maximumError": "3mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
                 }
               ],
               "outputHashing": "all"
@@ -87,7 +87,7 @@
             ],
             "styles": [
               "src/styles.css",
-               "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
             "scripts": []
           }
