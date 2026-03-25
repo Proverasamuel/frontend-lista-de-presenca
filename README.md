@@ -1,27 +1,171 @@
-# Frontend
+# 📱 Sistema de Registro de Presença via QR Code
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.1.
+## 📌 Sobre o Projeto
 
-## Development server
+Este projeto foi desenvolvido com o objetivo de **digitalizar o processo de registro de presenças em sala de aula**, que tradicionalmente era feito em papel.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+A solução utiliza **QR Code** para permitir que os alunos registrem presença de forma rápida e automática, enquanto o delegado pode acompanhar tudo em tempo real.
 
-## Code scaffolding
+---
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## 🚀 Demonstração
 
-## Build
+🔗 Acesse a aplicação:
+[https://lista-de-presenca-app.netlify.app/login](https://lista-de-presenca-app.netlify.app/login)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+---
 
-## Running unit tests
+## 🧠 Problema
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+O processo manual de registro de presenças apresenta vários desafios:
 
-## Running end-to-end tests
+* 📄 Uso excessivo de papel
+* ❌ Erros no preenchimento
+* 🕒 Processo demorado
+* 📉 Dificuldade no controle e organização
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+---
 
-## Further help
+## 💡 Solução
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Foi desenvolvida uma aplicação web que permite:
+
+* ✅ Criar aulas com QR Code único
+* 📷 Alunos marcarem presença via scanner
+* 📊 Delegado visualizar presenças em tempo real
+* 📄 Exportar presenças em PDF
+* 🔐 Controle de acesso por perfil (Delegado / Aluno)
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+### 🔹 Frontend
+
+* Angular
+* Tailwind CSS
+* Netlify (Deploy)
+
+### 🔹 Backend
+
+* Node.js
+* Express
+* Render (Deploy)
+
+### 🔹 Banco de Dados & Auth
+
+* Firebase (Firestore + Authentication)
+
+---
+
+## 🔗 Arquitetura
+
+A aplicação segue uma arquitetura **cliente-servidor (SPA + API REST)**:
+
+```
+Frontend (Angular - Netlify)
+        ↓
+API REST (Node.js - Render)
+        ↓
+Firebase (Firestore)
+```
+
+* O frontend comunica com o backend via **HTTP (REST API)**
+* O backend gerencia regras de negócio e persistência no Firebase
+
+---
+
+## ⚙️ Funcionalidades
+
+### 👨‍🎓 Aluno
+
+* Login no sistema
+* Escanear QR Code
+* Marcar presença automaticamente
+* Inserir código manual (fallback)
+
+### 👨‍🏫 Delegado
+
+* Criar aulas
+* Gerar QR Code
+* Visualizar presenças por aula
+* Exportar lista em PDF
+
+---
+
+## 🔐 Controle de Acesso
+
+* **Delegado:** acesso ao dashboard e gestão de aulas
+* **Aluno:** acesso apenas ao registro de presença
+
+Proteção de rotas implementada com:
+
+* AuthGuard
+* RoleGuard
+
+---
+
+## 📦 Instalação Local
+
+### 1. Clonar o repositório
+
+```bash
+git clone https://github.com/seu-usuario/seu-repo.git
+```
+
+---
+
+### 2. Frontend
+
+```bash
+cd frontend
+npm install
+ng serve
+```
+
+---
+
+### 3. Backend
+
+```bash
+cd backend
+npm install
+npm run dev
+```
+
+---
+
+## 🌐 Deploy
+
+* Frontend: Netlify
+* Backend: Render
+* Banco de Dados: Firebase
+
+---
+
+## 📄 Exportação de Presenças
+
+O sistema permite exportar as presenças em **PDF**, contendo:
+
+* Disciplina
+* Aula
+* Lista de alunos
+* Data e hora do registro
+* Status (Presente/Ausente)
+
+---
+
+## 📈 Melhorias Futuras
+
+* 📱 Aplicação mobile
+* 🔔 Notificações em tempo real
+* 📊 Dashboard com estatísticas
+* 🧾 Histórico completo por aluno
+* 🔐 Autenticação com JWT mais robusta
+
+---
+
+## 👨‍💻 Autor
+
+**Provera Samuel**
+Desenvolvedor Web Fullstack
