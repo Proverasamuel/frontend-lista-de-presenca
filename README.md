@@ -110,7 +110,7 @@ Proteção de rotas implementada com:
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repo.git
+git clone https://github.com/Proverasamuel/frontend-lista-de-presenca.git
 ```
 
 ---
